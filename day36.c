@@ -1,0 +1,54 @@
+#include <stdio.h>
+#define MAX 100
+
+int cq[MAX];
+int front = -1, rear = -1;
+
+void enqueue(int x){
+    if(front == -1){
+        front = rear = 0;
+    }
+    else{
+        rear = (rear + 1) % MAX;
+    }
+    cq[rear] = x;
+}
+
+void dequeue(){
+    if(front == rear){
+        front = rear = -1;
+    }
+    else{
+        front = (front + 1) % MAX;
+    }
+}
+
+void display(){
+    if(front == -1) return;
+
+    int i = front;
+    while(1){
+        printf("%d ", cq[i]);
+        if(i == rear) break;
+        i = (i + 1) % MAX;
+    }
+}
+
+int main(){
+    int n, m, x;
+
+    scanf("%d",&n);
+
+    for(int i=0;i<n;i++){
+        scanf("%d",&x);
+        enqueue(x);
+    }
+
+    scanf("%d",&m);
+
+    for(int i=0;i<m;i++){
+        dequeue();
+    }
+
+    display();
+}
